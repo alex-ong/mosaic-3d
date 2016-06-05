@@ -40,16 +40,6 @@ public class GetGrid : MonoBehaviour {
             rowStartEnd.Add(new Vector2(Mathf.RoundToInt(i*rowSize),Mathf.RoundToInt((i+1)*rowSize)));
         }
         
-        Debug.Log("Columns:");
-        foreach(Vector2 vec in colStartEnd) {
-            Debug.Log(vec);
-        }
-        
-        Debug.Log("Rows:");
-        foreach(Vector2 vec in colStartEnd) {
-            Debug.Log(vec);
-        }
-        
         result = new Color[numRows,numColumns];
         this.numMosaics = numColumns * numRows;
         this.mosaicsPerSecond = this.numMosaics /totalTimeAvailable;
