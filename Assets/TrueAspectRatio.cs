@@ -13,7 +13,7 @@ public class TrueAspectRatio : MonoBehaviour
     private Vector3 startPosition;
     public float animationTime = 3.0f;
     private float animTimer = 0.0f;
-    
+    public bool done = false;
     void Start ()
     {
         Renderer r = this.gameObject.GetComponent<Renderer> ();
@@ -45,6 +45,8 @@ public class TrueAspectRatio : MonoBehaviour
         
         this.transform.localScale = Vector3.Lerp (startScale, targetScale, perc);
         this.transform.position = Vector3.Lerp (this.startPosition, Vector3.zero, perc);
-    
+        if (perc >= 1.0f) {
+            this.done = true;
+        }
     }
 }

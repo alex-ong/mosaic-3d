@@ -7,8 +7,8 @@ public class GetGrid : MonoBehaviour {
     public float totalTimeAvailable;
     public float timeElapsed = 0.0f;
     private float mosaicsPerSecond;
-    private int numMosaics;
-    private int currentMosaic = 0;
+    public int numMosaics;
+    public int currentMosaic = 0;
     Color32[] data;
     
     private Vector2 imageSize;
@@ -34,9 +34,9 @@ public class GetGrid : MonoBehaviour {
             colStartEnd.Add(new Vector2(Mathf.RoundToInt(i*colSize),Mathf.RoundToInt((i+1)*colSize)));
         }
         
-        int numRows = Mathf.RoundToInt(t.texelSize.y / colSize);
+        int numRows = Mathf.RoundToInt(this.imageSize.y / colSize);
         float rowSize = this.imageSize.y / numRows;
-        for (int i = 0; i < numColumns; i++) {
+        for (int i = 0; i < numRows; i++) {
             rowStartEnd.Add(new Vector2(Mathf.RoundToInt(i*rowSize),Mathf.RoundToInt((i+1)*rowSize)));
         }
         
@@ -89,6 +89,7 @@ public class GetGrid : MonoBehaviour {
         this.result[row,col] = new Color(Rtotal/count/255.0f,
                                          Gtotal/count/255.0f,
                                          Btotal/count/255.0f);
+        this.currentMosaic++;
     }
     
     
