@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 37583602}
   - 114: {fileID: 37583603}
+  - 114: {fileID: 37583604}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -128,6 +129,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCube: {fileID: 0}
   sampleCube: {fileID: 1168368714}
+--- !u!114 &37583604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37583601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a81d1da0b7e4d4c9f23182c1937a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileToLoad: file:///C:/Users/icinema/Dropbox (Alex)/Dropbox/Public/mosaic/data.csv
 --- !u!1 &518694961
 GameObject:
   m_ObjectHideFlags: 0
