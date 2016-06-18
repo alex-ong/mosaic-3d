@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class DataLoader : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class DataLoader : MonoBehaviour
     }
 
     private List<ColorString> colorStrings = new List<ColorString>();
-
+    private List<ColorString> remainingColorStrings = new List<ColorString>();
     // Use this for initialization
     void Start()
     {
@@ -67,9 +68,22 @@ public class DataLoader : MonoBehaviour
         return "picture (3220).jpg";
     }
 
+    public void Reset()
+    {
+        this.remainingColorStrings = new List<ColorString>(this.colorStrings);
+    }
+
     public string matchColour(Color rgb)
     {
-        return "";   
+        this.remainingColorStrings.OrderBy(cs =>
+        Mathf.Abs(cs.c.r - rgb.r) +
+        Mathf.Abs(cs.c.g - rgb.b) +
+        Mathf.Abs(cs.c.b - rgb.b)
+        ); 
+
+        string result = this.remainingColorStrings[0].s;
+        this.remainingColorStrings.RemoveAt(0);
+        return result;
     }
 
 

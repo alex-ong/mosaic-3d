@@ -1,11 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MasterController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnlitTransparentAlpha.shader">
     <Files>
-      <File FileName="Assets\DataLoader.cs" Line="23" Column="47" />
-      <File FileName="Assets\MasterController.cs" Line="39" Column="38" />
-      <File FileName="Assets\LoadImage.cs" Line="4" Column="1" />
+      <File FileName="Assets\DataLoader.cs" Line="81" Column="23" />
+      <File FileName="Assets\MasterController.cs" Line="54" Column="28" />
+      <File FileName="Assets\UnlitTransparentAlpha.shader" Line="34" Column="2" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="mosaic-3d" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True">
+              <Node name="UnlitTransparentAlpha.shader" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

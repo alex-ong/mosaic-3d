@@ -16,9 +16,14 @@ public class MasterController : MonoBehaviour {
     
     protected GameObject CreateCube() {
         GameObject go = GameObject.Instantiate(this.sampleCube);
-        go.GetComponent<LoadImage>().filePath = this.rootFolder + "cacheFiles/" + dataLoader.RandomFile();
+        go.GetComponent<LoadImage>().filePath = this.getCubePath(dataLoader.RandomFile());
         go.transform.SetParent(this.transform);
         return go;
+    }
+
+    protected string getCubePath(string fileName)
+    {
+        return this.rootFolder + "cacheFiles/" + fileName;
     }
    
     // Update is called once per frame
@@ -46,15 +51,15 @@ public class MasterController : MonoBehaviour {
         float yInc = this.selectedCube.transform.localScale.y / (rows);
         float startX = xInc * -columns/2.0f +0.5f * xInc;
         float startY = yInc * -rows/2.0f+0.5f * yInc;
-
+        dataLoader.Reset();
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < columns; x++) {
                 GameObject go = this.CreateCube();
                 //load image from correct place.
-				LoadImage li = go.GetComponent<LoadImage>();
-				Destroy(go.GetComponent<LoadImage>());
-                //TODO: instead of destroy, set loadimage.filePath.
                 Color c = averages[y,x];
+                string url = this.dataLoader.matchColour(c);
+                LoadImage li = go.GetComponent<LoadImage>();
+                li.filePath = this.getCubePath(url);
 
                 Transform t = go.transform;
                 t.localScale = new Vector3(xInc,yInc,1.0f);        

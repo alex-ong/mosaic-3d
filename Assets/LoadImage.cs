@@ -7,6 +7,9 @@ public class LoadImage : MonoBehaviour
 
     IEnumerator Start ()
     {
+        FadeTwoTextures ftt = this.gameObject.AddComponent<FadeTwoTextures>();
+        ftt.SetValue(1.0f);
+        ftt.enabled = false;
         // Start a download of the given URL
         WWW www = new WWW (filePath);
     
@@ -29,6 +32,10 @@ public class LoadImage : MonoBehaviour
             }
         }
     
+        ftt.delay = Random.Range(-3.0f,-0.5f);
+        ftt.startValue = 1.0f;
+        ftt.endValue = 0.0f;
+        ftt.enabled = true;
     }
   
     // Update is called once per frame

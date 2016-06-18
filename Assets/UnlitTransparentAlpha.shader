@@ -1,34 +1,38 @@
-﻿Shader "Unlit/UnlitTransparentAlpha" 
-{
-	Properties 
-	{
-		_Color ("Color", Color) = (1,1,1,1)	
-		_MainTex ("Base (RGB) Alpha (A)", 2D) = "white"
-	}
-
-	Category 
-	{
-		Lighting Off
-		//ZWrite Off
-        
-		Cull back
-		Blend SrcAlpha OneMinusSrcAlpha
-        AlphaTest Greater 0.001  // uncomment if you have problems like the sprites or 3d text have white quads instead of alpha pixels.
-		Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Opaque"}
-
-		SubShader 
-		{
-
-           		Pass 
-           		{
-           			ZWrite On  // uncomment if you have problems like the sprite disappear in some rotations.
-    				SetTexture [_MainTex] 
-            			{
-					ConstantColor [_Color]
-               				Combine Texture * constant
-				}
-
-			}
-		}
-	}
-}
+﻿Shader "Unlit/UnlitTransparentAlpha"
+ {
+     Properties 
+     {
+        _Color ("Main Color", Color) = (1,1,1,1)
+        _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {} 
+        _BlendTex ("Blend (RGB)", 2D) = "white"
+        _BlendAlpha ("Blend Alpha", float) = 0
+     }
+     SubShader 
+     {
+        Tags { "Queue"="Geometry-9" "IgnoreProjector"="True" "RenderType"="Transparent" }
+        Lighting Off
+        LOD 200
+        Blend SrcAlpha OneMinusSrcAlpha
+  
+        CGPROGRAM
+        #pragma surface surf BlinnPhong noforwardadd
+  
+        fixed4 _Color;
+        sampler2D _MainTex;
+        sampler2D _BlendTex;
+        float _BlendAlpha;
+  
+        struct Input {
+          float2 uv_MainTex;
+        };
+  
+        void surf (Input IN, inout SurfaceOutput o) {
+          fixed4 c = ( ( 1 - _BlendAlpha ) * tex2D( _MainTex, IN.uv_MainTex ) + _BlendAlpha * tex2D( _BlendTex, IN.uv_MainTex ) );
+          o.Emission = c.rgb * _Color;
+          o.Alpha = c.a;
+        }
+        ENDCG
+     }
+  
+     Fallback "Transparent/VertexLit"
+ }
