@@ -132,7 +132,7 @@ MonoBehaviour:
   selectedCube: {fileID: 0}
   sampleCube: {fileID: 1168368714}
   allCubes: []
-  rootFolder: file:///C:/Users/Alex/Desktop/Dropbox/Public/mosaic/
+  rootFolder: https://dl.dropboxusercontent.com/u/775758/mosaic/
   dataLoader: {fileID: 37583604}
   cubeAnimations: []
   currentAnimation: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcec74ddbbb1aa438c2c742c9b1d237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numColumns: 30
+  numColumns: 15
   totalTimeAvailable: 3
   timeElapsed: 0
   numMosaics: 0

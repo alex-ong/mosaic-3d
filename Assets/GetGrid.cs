@@ -35,6 +35,10 @@ public class GetGrid : MonoBehaviour {
         }
         
         int numRows = Mathf.RoundToInt(this.imageSize.y / colSize);
+        //TODO: change this so aspect ratio is taken into consideration for numRows/Columns.
+        if (numRows > 2 * this.numColumns) {
+            numRows = 2 * this.numColumns;
+        }
         float rowSize = this.imageSize.y / numRows;
         for (int i = 0; i < numRows; i++) {
             rowStartEnd.Add(new Vector2(Mathf.RoundToInt(i*rowSize),Mathf.RoundToInt((i+1)*rowSize)));
