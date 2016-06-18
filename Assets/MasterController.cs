@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MasterController : MonoBehaviour {
     public GameObject selectedCube;
     public GameObject sampleCube;
+    public List<GameObject> allCubes;
 
 	public string rootFolder;
     public DataLoader dataLoader;
@@ -44,6 +46,7 @@ public class MasterController : MonoBehaviour {
 
     //TODO: make this an IEnumerator.
     private void HandleFinishSelect(Color[,] averages){
+        this.allCubes = new List<GameObject>();
         int rows = averages.GetLength(0);
         int columns = averages.GetLength(1);
         
@@ -69,10 +72,10 @@ public class MasterController : MonoBehaviour {
                 t.SetParent(this.transform);
                 go.SetActive(true);
                 go.GetComponent<Renderer>().material.color = c;
+                allCubes.Add(go);
             }
         }
-        
-        
+   
     }
     
     
@@ -81,6 +84,25 @@ public class MasterController : MonoBehaviour {
             return;
         }
         this.selectedCube = ch.gameObject;
+        this.StartCoroutine(this.DestroyOthers());
+    }
+
+    public IEnumerator DestroyOthers() {
+        //TODO: add animations in here. can use a variety of classes and pass in our cubes.
+        yield return null;
+        //keep yielding until animation is complete.
+
+        foreach (GameObject go in this.allCubes) {
+            if (go != this.selectedCube) {
+                Destroy(go);
+            }
+        }
+
+        this.FinishDestroyOthers();
+    }
+
+    //after everything else is destroyed, we will move the cube to the centre etc.
+    public void FinishDestroyOthers() {
         this.selectedCube.GetComponent<TrueAspectRatio>().enabled = true;
         this.selectedCube.GetComponent<GetGrid>().enabled = true;
     }
