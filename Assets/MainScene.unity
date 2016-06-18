@@ -95,6 +95,8 @@ GameObject:
   - 4: {fileID: 37583602}
   - 114: {fileID: 37583603}
   - 114: {fileID: 37583604}
+  - 114: {fileID: 37583606}
+  - 114: {fileID: 37583605}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -129,8 +131,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCube: {fileID: 0}
   sampleCube: {fileID: 1168368714}
+  allCubes: []
   rootFolder: file:///C:/Users/Alex/Desktop/Dropbox/Public/mosaic/
   dataLoader: {fileID: 37583604}
+  cubeAnimations: []
+  currentAnimation: 0
 --- !u!114 &37583604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +148,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileToLoad: data.csv
+--- !u!114 &37583605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37583601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede59e072094d9d4d8681cc250f05e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 3
+  sideForce: 100
+--- !u!114 &37583606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37583601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aac1fa7898399445b43541bcc5e236f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 3
+  punchForce: 500
 --- !u!1 &518694961
 GameObject:
   m_ObjectHideFlags: 0
