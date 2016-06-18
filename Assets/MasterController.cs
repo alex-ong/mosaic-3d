@@ -4,6 +4,10 @@ using System.Collections;
 public class MasterController : MonoBehaviour {
     public GameObject selectedCube;
     public GameObject sampleCube;
+
+	public string rootFolder;
+    public DataLoader dataLoader;
+
     // Use this for initialization
     void Start () {
         GameObject go = CreateCube();
@@ -12,6 +16,7 @@ public class MasterController : MonoBehaviour {
     
     protected GameObject CreateCube() {
         GameObject go = GameObject.Instantiate(this.sampleCube);
+        go.GetComponent<LoadImage>().filePath = this.rootFolder + "cacheFiles/" + dataLoader.RandomFile();
         go.transform.SetParent(this.transform);
         return go;
     }
@@ -31,7 +36,8 @@ public class MasterController : MonoBehaviour {
             }
         }
     }
-    
+
+    //TODO: make this an IEnumerator.
     private void HandleFinishSelect(Color[,] averages){
         int rows = averages.GetLength(0);
         int columns = averages.GetLength(1);
@@ -40,12 +46,16 @@ public class MasterController : MonoBehaviour {
         float yInc = this.selectedCube.transform.localScale.y / (rows);
         float startX = xInc * -columns/2.0f +0.5f * xInc;
         float startY = yInc * -rows/2.0f+0.5f * yInc;
-        Debug.Log (this.selectedCube.transform.localScale.x);
-        Debug.Log (xInc * columns);
+
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < columns; x++) {
                 GameObject go = this.CreateCube();
-                Destroy(go.GetComponent<LoadImage>());
+                //load image from correct place.
+				LoadImage li = go.GetComponent<LoadImage>();
+				Destroy(go.GetComponent<LoadImage>());
+                //TODO: instead of destroy, set loadimage.filePath.
+                Color c = averages[y,x];
+
                 Transform t = go.transform;
                 t.localScale = new Vector3(xInc,yInc,1.0f);        
                 t.localPosition = new Vector3(xInc * x +startX,
@@ -53,7 +63,7 @@ public class MasterController : MonoBehaviour {
                                                 0.0f);
                 t.SetParent(this.transform);
                 go.SetActive(true);
-                go.GetComponent<Renderer>().material.color = averages[y,x];
+                go.GetComponent<Renderer>().material.color = c;
             }
         }
         
