@@ -7,7 +7,6 @@ public class MasterController : MonoBehaviour
     public GameObject selectedCube;
     public GameObject sampleCube;
     public List<GameObject> allCubes;
-
     public string rootFolder;
     public DataLoader dataLoader;
     public List<DestroyCubeAnimation> cubeAnimations;
@@ -45,7 +44,7 @@ public class MasterController : MonoBehaviour
 
     protected string getCubePath(string fileName)
     {
-        return this.rootFolder + "cacheFiles/" + fileName;
+        return this.rootFolder + "CacheFiles/" + fileName;
     }
    
     // Update is called once per frame
@@ -99,10 +98,12 @@ public class MasterController : MonoBehaviour
         }
    
     }
-
     
     public void HandleClickObject(ClickHandler ch)
     {
+        if (!this.dataLoader.ready) {
+            return;
+        }
         if (this.selectedCube != null) {
             return;
         }
@@ -122,6 +123,7 @@ public class MasterController : MonoBehaviour
         anim.StartAnimation(cubesMinusSelected);
         anim.enabled = true;
     }
+    
 
     //after everything else is destroyed, we will move the cube to the centre etc.
     public void FinishDestroyAnimation()
@@ -135,5 +137,29 @@ public class MasterController : MonoBehaviour
 
         this.selectedCube.GetComponent<TrueAspectRatio>().enabled = true;
         this.selectedCube.GetComponent<GetGrid>().enabled = true;
+    }
+    
+    public void OnGUI()
+    {
+        float boxWidth = 200f;
+        float boxHeight = 50f;
+        Rect box = new Rect(Screen.width / 2 - boxWidth / 2, Screen.height - boxHeight * 2, boxWidth, boxHeight);
+        
+        string cubeCount = this.allCubes.Count.ToString();
+        string loadedCubeCount = this.GetLoadedCubeCount().ToString();
+        if (dataLoader.ready) {
+            GUI.Box(box, "Click a box to continue\n" + "Total images loaded: " + loadedCubeCount + "/" + cubeCount);
+        }
+    }
+    
+    protected int GetLoadedCubeCount()
+    {
+        int result = 0;
+        foreach (GameObject go in this.allCubes) {
+            if (go.GetComponent<LoadImage>().loaded) {
+                result++;
+            }
+        }
+        return result;
     }
 }

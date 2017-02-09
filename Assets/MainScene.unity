@@ -132,7 +132,7 @@ MonoBehaviour:
   selectedCube: {fileID: 0}
   sampleCube: {fileID: 1168368714}
   allCubes: []
-  rootFolder: https://dl.dropboxusercontent.com/u/775758/mosaic/
+  rootFolder: http://alex-ong.github.io/mosaic-3d/
   dataLoader: {fileID: 37583604}
   cubeAnimations: []
   currentAnimation: 0
@@ -339,6 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filePath: file:///C:/Users/Alex/Desktop/Dropbox/Public/mosaic/cachefiles/picture
     (3636).jpg
+  web: 1
 --- !u!23 &1168368719
 MeshRenderer:
   m_ObjectHideFlags: 0

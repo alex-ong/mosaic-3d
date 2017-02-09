@@ -4,14 +4,20 @@ using System.Collections;
 public class LoadImage : MonoBehaviour
 {
     public string filePath;
-
+    public bool web = true;
+    
+    public bool loaded = false;
+    
     IEnumerator Start ()
     {
+        if (web) {
+            filePath = filePath.Replace(" ", "%20");
+        }
         FadeTwoTextures ftt = this.gameObject.AddComponent<FadeTwoTextures>();
         ftt.SetValue(1.0f);
         ftt.enabled = false;
         // Start a download of the given URL
-        WWW www = new WWW (filePath);
+        WWW www = new WWW (filePath);        
     
         // Wait for download to complete
         yield return www;
@@ -31,7 +37,7 @@ public class LoadImage : MonoBehaviour
                 renderer.material.mainTextureOffset = new Vector2 (0.0f, (0.5f - (0.5f * 1.0f / aspect)));
             }
         }
-    
+        this.loaded = true;
         ftt.delay = Random.Range(-3.0f,-0.5f);
         ftt.startValue = 1.0f;
         ftt.endValue = 0.0f;
