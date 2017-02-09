@@ -130,6 +130,8 @@ public class MasterController : MonoBehaviour
     {
         foreach (GameObject go in this.allCubes) {
             if (go != this.selectedCube) {
+                Texture tex = go.GetComponent<Renderer>().material.mainTexture;
+                Destroy(tex);
                 Destroy(go);
             }
         }
@@ -137,6 +139,7 @@ public class MasterController : MonoBehaviour
 
         this.selectedCube.GetComponent<TrueAspectRatio>().enabled = true;
         this.selectedCube.GetComponent<GetGrid>().enabled = true;
+        Resources.UnloadUnusedAssets();
     }
     
     public void OnGUI()
